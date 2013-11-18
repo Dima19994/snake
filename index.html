@@ -1,0 +1,31 @@
+<html>
+<head>
+	<meta charset = "utf-8"/>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<script language="JavaScript" type="text/javascript" src="script/game.js"></script>
+</head>
+<body onload="init()">
+<img src = "script/img/head.jpg" id = "head" style="display:none;" />
+<img src = "script/img/tail.jpg" id = "tail" style="display:none;" />
+<img src = "script/img/corn.jpg" id = "corn" style="display:none;" />
+<img src = "script/img/bomb.jpg" id = "bomb" style="display:none;" />
+<img src = "script/img/magneto.jpg" id = "magneto" style="display:none;" />
+	<div id="wrapper">
+		<canvas id="effects" width="300px" height="200px"></canvas>
+		<canvas id="pole" width="300px" height="200px"></canvas>
+		<div id="controllers">
+			<canvas id="score"></canvas>
+			<canvas id="life"></canvas>
+			<div id="arrows">
+				<div id="up"></div>
+				<div id="to_side">
+					<div id="left"></div>
+					<div id="splitter"></div>
+					<div id="right"></div>
+				</div>
+				<div id="down"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

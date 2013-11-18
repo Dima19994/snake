@@ -1,0 +1,206 @@
+var delta;
+var score = 0;
+var direction = "right";
+var pause = true;
+function init()
+{	
+	var pole=document.getElementById("pole");
+	//var ctx=pole.getContext("2d");
+	pole.width=window.innerWidth;
+	pole.height=window.innerHeight;
+	var pole_width = 80;
+	var pole_height = 60;
+	var x = Math.min(pole.width/pole_width,pole.height/pole_height);
+	x = x-x*20%1/20;
+	pole.width = pole_width*x;
+	pole.height = pole_height*x;
+	//ctx.stroke();
+	delta = x;
+	var snake = new Snake(pole_width, pole_height);
+	var corn = new Corn(pole_width, pole_height);
+	var vx = 0;
+	var vy = 0;
+	var snake_draw;
+	var life = 2;
+	var timer = setInterval(function(){
+		if(!pause)
+		{
+			pole.width = pole.width;
+			if(direction=='up')
+			{
+				vy = 1;
+				vx = 0;
+			}
+			else if(direction=='down')
+			{
+				vy = -1;
+				vx = 0;
+			}
+			else if(direction=='left')
+			{
+				vx = -1;
+				vy = 0;
+			}
+			else if(direction=='right')
+			{
+				vx = 1;
+				vy = 0;
+			}
+			snake_draw = snake.draw();
+			corn.draw();
+			if(snake_draw==1)
+			{
+				life = 0;
+				score = snake.length - 10;
+				clearInterval(timer);
+				pole.width=pole.width;
+				show_result();
+			}
+			else if (snake_draw==2)
+			{
+				console.log('укусил за жопу.');
+				if(life < 1)
+				{
+					score = snake.length - 10;
+					clearInterval(timer);
+					pole.width=pole.width;
+					show_result();
+				}
+				else life--;
+			}
+			snake.pos_x += vx;
+			snake.pos_y -= vy;
+			snake.dir.unshift(direction);
+			if((corn.pos_x === snake.pos_x) && (corn.pos_y === snake.pos_y))
+			{
+				snake.length++;
+				corn.pos_x = Math.round((Math.random()*pole_width+1)-1);
+				corn.pos_y = Math.round((Math.random()*pole_height+1)-1);
+			}
+		}
+		else
+		{
+			var ctx=pole.getContext("2d");
+			pole.width = pole.width;
+			ctx.fillStyle = "#00F";
+    			ctx.font = "italic 30pt Arial";
+			ctx.fillText("Пауза!", 20, 50);				
+			ctx.stroke();
+		}
+		console.log(pause);
+	},100);
+}
+function show_result()
+{
+	var pole=document.getElementById("pole");
+	var ctx=pole.getContext("2d");
+	pole.width = pole.width;
+	ctx.textBaseline = "bottom";
+	ctx.fillStyle = "#00F";
+    	ctx.strokeStyle = "#F00";
+    	ctx.font = "italic 30pt Arial";
+    	ctx.fillText("Потрачено!", 20, 50);
+    	ctx.font = 'bold 30px sans-serif';
+    	ctx.strokeText("Достигнутый результат: "+score, 20, 100);
+	ctx.stroke();
+}
+document.onkeydown = function checkKeycode(event)
+{
+	var keycode;
+	if(!event) var event = window.event;
+	if (event.keyCode) keycode = event.keyCode; 
+	else if(event.which) keycode = event.which; // all browsers
+	if(keycode==38 || keycode==87)
+		direction = "up"
+	else if(keycode==40 || keycode==83 )
+		direction = "down"
+	else if(keycode==37 || keycode==65 )
+		direction = "left"
+	else if(keycode==39 || keycode==68 )
+		direction = "right";
+	else if(keycode==32) pause = !pause;
+}
+
+function Corn(w,h)
+{
+	this.pos_x = Math.round((Math.random()*w+1)-1);
+	this.pos_y = Math.round((Math.random()*h+1)-1);
+	this.draw = function()
+	{
+		var pole=document.getElementById("pole");
+		var ctx=pole.getContext("2d");
+		ctx.drawImage(document.getElementById('corn'), this.pos_x*delta, this.pos_y*delta,delta,delta);
+		ctx.stroke();
+	}
+}
+function Snake(w,h)
+{
+	var start = 10;
+	console.log(w);
+	console.log(h);
+	var pole=document.getElementById("pole");
+	var ctx=pole.getContext("2d");
+	this.pos_x = 20;
+	this.pos_y = 20;
+	this.length = start;
+	this.dir = [];
+	var a = 0;
+	var b = 0;
+	var x = this.pos_x*delta;
+	var y = this.pos_y*delta;
+	this.draw = function()
+	{
+	x = this.pos_x*delta;
+	y = this.pos_y*delta;
+		if(this.length > 0)
+		{
+			var pole=document.getElementById("pole");
+			var ctx=pole.getContext("2d");
+			if((this.pos_x>w) || (this.pos_x<0) || (this.pos_y<0) || (this.pos_y>h))
+			{
+				return 1;//завершение рисования
+			}
+				for(var i = 0; i < this.length; i++)
+				{
+					if(i==0)
+					{
+						ctx.drawImage(document.getElementById('head'), x, y,delta,delta);
+						a = 0;
+						b = 0;
+					}
+					else if(i>0)
+					{
+						if(this.dir[i-1]=='up')
+						{
+							b = 1;
+							a = 0;
+						}
+						else if(this.dir[i-1]=='down')
+						{
+							b = -1;
+							a = 0;
+						}
+						else if(this.dir[i-1]=='left')
+						{
+							a = -1;
+							b = 0;
+						}
+						else if(this.dir[i-1]=='right')
+						{
+							a = 1;
+							b = 0;
+						}
+						x -= delta*a;
+						y += delta*b;
+						start--;
+						if((Math.round(x)==Math.round(this.pos_x*delta))&&(Math.round(y)==Math.round(this.pos_y*delta)) && (start<1))
+						{
+							return 2;
+						}
+						ctx.drawImage(document.getElementById('tail'), x, y,delta,delta);
+					}
+				}
+		ctx.stroke();
+		}		
+	}	
+}
