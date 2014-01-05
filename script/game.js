@@ -7,6 +7,7 @@ var pos_x = 0;
 var pause = false;
 function init()
 {	
+	alert("start");
 	var pole=document.getElementById("pole");
 	//var ctx=pole.getContext("2d");
 	pole.width=window.innerWidth;
