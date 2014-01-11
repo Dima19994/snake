@@ -1,109 +1,218 @@
-html
+*
 {
-	width:100%;
+	margin:0;
+	padding:0;
 }
 body
 {
-	margin:0;
-	padding:0;
+	height:100%;
+	width:100%;
+	background-image:url("img/bg.jpg");
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
 }
 #wrapper
 {
-	display:block;
+	position:relative;
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:15px;
+	padding-left:10px;
+	padding-right:10px;
+}
+#info
+{
+	height:50px;
 	width:100%;
-	height:100%;
-	overflow:hidden;
 }
-#pole
+#lifes
 {
-	position:absolute;
-	display:block;
 	float:left;
-	margin:0;
-	padding:0;
-	z-index:3;
-	border-right:1px solid #000;
 }
-#effects
+.life
 {
-	position:absolute;
-	display:block;
+	background-repeat:no-repeat;
+	width:38px;
+	height:36px;
 	float:left;
-	margin:0;
-	padding:0;
-	z-index:1;
+	-webkit-transition: all 1s ease-out 0.5s;
+    -moz-transition: all 1s ease-out 0.5s;
+    -o-transition: all 1s ease-out 0.5s;
+	transition: all 1s ease-out 0.5s;
 }
-#controllers
+.full
 {
-	display:block;
-	float:left;
-	height:100%;
+	background-image:url("img/life_f.png");
+}
+.empty
+{
+	background-position:3px;
+	background-image:url("img/life.png");
 }
 #score
 {
-	display:block;
-	float:none;
-	width:100%;
-	height:100px;
-	background-color:red;
-}
-#life
-{
-	display:block;
-	float:none;
-	width:100%;
-	height:100px;
-	background-color:blue;
-}
-#arrows
-{
-	background-color:yellow;
+	color:white;
+	font-size:25px;
 	float:right;
+}
+#pole
+{
+	border: 4px double white; 
+    background-image:url("img/white04.png");
+    padding: 0px;
+}
+#game_proc
+{
+	width:100%;
+	height:53px;
+	padding-top:10px;
+}
+#reset
+{
+	-webkit-transition: all 0.5s ease-out 0.5s;
+    -moz-transition: all 0.5s ease-out 0.5s;
+    -o-transition: all 0.5s ease-out 0.5s;
+	transition: all 0.5s ease-out 0.5s;
+	-moz-transform: rotate(0deg); /* Р”Р»СЏ Firefox */
+    -ms-transform: rotate(0deg); /* Р”Р»СЏ IE */
+    -webkit-transform: rotate(0deg); /* Р”Р»СЏ Safari, Chrome, iOS */
+    -o-transform: rotate(0deg); /* Р”Р»СЏ Opera */
+    transform: rotate(0deg);
+	float:left;
+	width:45px;
+	height:53px;
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+	background-image:url("img/reset.png");
+	background-repeat:no-repeat;
+}
+#reset:hover, #reset:focus
+{
+	-moz-transform: rotate(180deg); /* Р”Р»СЏ Firefox */
+    -ms-transform: rotate(180deg); /* Р”Р»СЏ IE */
+    -webkit-transform: rotate(180deg); /* Р”Р»СЏ Safari, Chrome, iOS */
+    -o-transform: rotate(180deg); /* Р”Р»СЏ Opera */
+    transform: rotate(180deg);
+}
+#reset:hover, #reset:focus
+{
+	-moz-transform: rotate(180deg); /* Р”Р»СЏ Firefox */
+    -ms-transform: rotate(180deg); /* Р”Р»СЏ IE */
+    -webkit-transform: rotate(180deg); /* Р”Р»СЏ Safari, Chrome, iOS */
+    -o-transform: rotate(180deg); /* Р”Р»СЏ Opera */
+    transform: rotate(180deg);
+}
+#play
+{
+	display:none;
+	float:right;
+	width:45px;
+	height:53px;
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+	background-image:url("img/play.png");
+	background-repeat:no-repeat;
+}
+#pause
+{
+	
+	float:right;
+	width:45px;
+	height:53px;
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+	background-image:url("img/pause.png");
+	background-repeat:no-repeat;
 }
 #up
 {
-	display:block;
-	width:30px;
-	height:30px;
-	margin-left:30px;
-	background-color:#231;
+	margin-top:0;
+	margin-left:auto;
+	margin-right:auto;
+	width:50px;
+	height:43px;
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+	background-image:url("img/up.png");
+	background-repeat:no-repeat;
 }
-#to_side
+#side
 {
+	position:absolute;
 	display:block;
-	float:none;
-	height:30px;
-	width:100px;
+	height:40px;
+	left:50%;
+	margin-top:0;
+	margin-bottom:0;
+	margin-left:-62.5px;
+	margin-right:auto;
+}
+#side>div
+{
+	float:left;
 }
 #left
 {
-	display:block;
-	float:left;
-	width:30px;
-	height:30px;
-	background-color:red;
+	margin-top:0;
+	margin-left:auto;
+	margin-right:auto;
+	width:40px;
+	height:45px;
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+	background-image:url("img/left.png");
+	background-repeat:no-repeat;
+}
+#middle
+{	
+	margin-top:4px;
+	margin-left:auto;
+	width:45px;
+	height:45px;
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+	background-image:url("img/middle.png");
+	background-repeat:no-repeat;
 }
 #right
-{
-	display:block;
-	float:left;
-	width:30px;
-	height:30px;
-	background-color:green;
-}
-#splitter
-{
-	display:block;
-	float:left;
-	width:30px;
-	height:30px;
+{	
+	margin-top:0px;
+	margin-left:auto;
+	width:40px;
+	height:45px;
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+	background-image:url("img/right.png");
+	background-repeat:no-repeat;
 }
 #down
 {
-	display:block;
-	float:none;
-	width:30px;
-	height:30px;
-	margin-left:30px;
-	background-color:#123;
+	margin-top:52px;
+	margin-left:auto;
+	margin-right:auto;
+	width:50px;
+	height:43px;
+	-moz-background-size: 100%; 
+    -webkit-background-size: 100%; 
+    -o-background-size: 100%; 
+    background-size: 100%; 
+	background-image:url("img/down.png");
+	background-repeat:no-repeat;
 }
