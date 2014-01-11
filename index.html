@@ -1,31 +1,46 @@
 <html>
-<head>
-	<meta charset = "utf-8"/>
-	<link rel="stylesheet" type="text/css" href="style/style.css">
-	<script language="JavaScript" type="text/javascript" src="script/game.js"></script>
-</head>
-<body onload="init()">
-<img src = "script/img/head.jpg" id = "head" style="display:none;" />
-<img src = "script/img/tail.jpg" id = "tail" style="display:none;" />
-<img src = "script/img/corn.jpg" id = "corn" style="display:none;" />
-<img src = "script/img/bomb.jpg" id = "bomb" style="display:none;" />
-<img src = "script/img/magneto.jpg" id = "magneto" style="display:none;" />
-	<div id="wrapper">
-		<canvas id="effects" width="300px" height="200px"></canvas>
-		<canvas id="pole" width="300px" height="200px"></canvas>
-		<div id="controllers">
-			<canvas id="score"></canvas>
-			<canvas id="life"></canvas>
-			<div id="arrows">
+	<head>
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+		<script language="JavaScript" type="text/javascript" src="script/game.js"></script>
+		<script language="JavaScript" type="text/javascript" src="lib/fastclick.js"></script>
+	</head>
+	<body onload="init()">
+	<script type="text/javascript">
+		$.ui.ready(function () {
+			new FastClick(document.body);
+		});
+	</script>	
+	
+	<img src = "img/head.png" id = "head" style="display:none;" />
+	<img src = "img/tail.png" id = "tail" style="display:none;" />
+	<img src = "img/corn.png" id = "corn" style="display:none;" />
+		<div id="wrapper">
+			<div id="info">
+				<div id="lifes">
+					<div class="life full"></div>
+					<div class="life full"></div>
+					<div class="life full"></div>
+				</div>
+				<div id="score">
+					1111
+				</div>
+			</div>
+			<canvas id="pole"></canvas>
+			<div id="game_proc">
+				<div id="reset"></div>
+				<div id="play"></div>
+				<div id="pause"></div>
+			</div>
+			<div id="controls">
 				<div id="up"></div>
-				<div id="to_side">
+				<div id="side">
 					<div id="left"></div>
-					<div id="splitter"></div>
+					<div id="middle"></div>
 					<div id="right"></div>
 				</div>
-				<div id="down"></div>
+				<div id="down">
+				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>
